@@ -1,0 +1,41 @@
+html {
+	font-family: monospace, 'courier new';
+}
+
+.branch {
+	margin: 8px;
+	box-shadow: 0px 4px 12px rgba(0,0,0,0.3);
+}
+
+.branch_expander {
+	width: 16px;
+	transition: 0.5s;
+	cursor: pointer;
+	vertical-align: top;
+	text-align: center;
+}
+
+.branch_header {
+	margin: 2px;
+	cursor: pointer;
+}
+
+.branch_content {
+	height: auto;
+}
+
+.closed {
+	height: 0;
+	display: none;
+}
+
+.branch_table {
+	width: 100%;
+	border-collapse: collapse;
+	padding: 0;
+}
+
+.branch_message {
+	margin: 2px;
+	color: #AA0000;
+}
