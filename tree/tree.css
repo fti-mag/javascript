@@ -5,18 +5,19 @@ html {
 .branch {
 	margin: 8px;
 	box-shadow: 0px 4px 12px rgba(0,0,0,0.3);
+	background-color: #FFFFFF;
 }
 
 .branch_expander {
 	width: 16px;
-	transition: 0.5s;
+	// transition: 0.5s;
 	cursor: pointer;
 	vertical-align: top;
 	text-align: center;
 }
 
 .branch_header {
-	margin: 2px;
+	padding: 2px;
 	cursor: pointer;
 }
 
@@ -36,6 +37,9 @@ html {
 }
 
 .branch_message {
-	margin: 2px;
 	color: #AA0000;
+}
+
+.branch_highlight {
+	background-color: #FFEE66;
 }

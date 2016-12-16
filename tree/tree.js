@@ -1,7 +1,20 @@
 function BranchHeader(text) {
 	this.elem = document.createElement('div');
 	this.elem.classList.add('branch_header');
-	this.elem.innerHTML = text;
+
+	this.enter = function () {
+		this.elem.classList.add('branch_highlight');
+	};
+
+	this.leave = function () {
+		this.elem.classList.remove('branch_highlight');
+	};
+
+	this.set = function (text) {
+		this.elem.innerHTML = text;
+	};
+
+	this.set(text);
 }
 
 function BranchContent() {
@@ -28,14 +41,12 @@ function BranchExpander() {
 	this.elem.classList.add('branch_expander');
 
 	this.enter = function () {
-		this.elem.style.backgroundColor = '#EE2211';
+		this.elem.classList.add('branch_highlight');
 	};
 
 	this.leave = function () {
-		this.elem.style.backgroundColor = '#FFEE22';
+		this.elem.classList.remove('branch_highlight');
 	};
-
-	this.leave();
 
 	this.update = function (state) {
 		this.elem.innerHTML = state;
@@ -92,13 +103,19 @@ function Branch(header) {
 
 	this.enter = function () {
 		this.expander.enter();
+		this.header.enter();
+		this.elem.classList.add('branch_highlight');
 	};
 	this.elem.onmouseenter = this.enter.bind(this);
 
 	this.leave = function () {
 		this.expander.leave();
+		this.header.leave();
+		this.elem.classList.remove('branch_highlight');
 	};
 	this.elem.onmouseleave = this.leave.bind(this);
+
+	this.leave();
 
 	// open-close
 
