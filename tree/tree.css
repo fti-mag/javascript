@@ -38,6 +38,7 @@ html {
 
 .branch_message {
 	color: #AA0000;
+	cursor: pointer;
 }
 
 .branch_highlight {

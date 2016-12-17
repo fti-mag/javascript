@@ -173,6 +173,7 @@ function Branch(header) {
 
 	this.header.elem.onclick = toggle;
 	this.expander.elem.onclick = toggle;
+	this.message.onclick = toggle;
 
 	this.close();
 
