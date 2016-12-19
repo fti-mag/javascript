@@ -13,7 +13,7 @@ window.onload = function () {
 
 	var create = function (path) {
 		return function (callback) {
-			$.post('/cgi-bin/dirs.rb', 'path=' + encodeURIComponent(path)).done(function(data, status) {
+			$.get('/cgi-bin/dirs.rb?path=' + encodeURIComponent(path)).done(function(data, status) {
 				console.log(data);
 				var branches = [];
 				var content = null;
@@ -26,7 +26,7 @@ window.onload = function () {
 					for(var i in content) {
 						dir = content[i];
 						var branch = new Branch(escapeHtml(dir.name));
-						if(dir.size != 0) {
+						if(dir.size > 0) {
 							branch.holdover(create(path + '/' + dir.name));
 						}
 						branches.push(branch);
@@ -40,4 +40,5 @@ window.onload = function () {
 	};
 
 	trunk.holdover(create('/'));
+	trunk.open();
 }

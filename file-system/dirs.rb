@@ -10,9 +10,13 @@ cgi = CGI.new
 
 print cgi.header
 
+def countsubdirs(path)
+	Dir.entries(path).select{ |fname| File.directory?(path + '/' + fname) }.length() - 2 rescue 0
+end
+
 def subdirs(path)
-	content = Dir.entries(path).select{ |fname| fname != '.' and fname != '..' } rescue []
-	content.select{ |fname| File.directory?(path + '/' + fname) }.sort()
+	content = Dir.entries(path).select{ |fname| File.directory?(path + '/' + fname) } rescue []
+	content.select{ |fname| fname != '.' and fname != '..' }.sort()
 end
 
 # sleep(0.5)
@@ -22,7 +26,7 @@ $stderr.print (path + "\n")
 
 objs = subdirs(path).map{ |fname|
 	fpath = path + '/' + fname
-	size = subdirs(fpath).length()
+	size = countsubdirs(fpath)
 	'{"name": ' + fname.to_json() + ', "size": "' + size.to_s() + '"}'
 }
 

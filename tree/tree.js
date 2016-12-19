@@ -2,14 +2,6 @@ function BranchHeader(text) {
 	this.elem = document.createElement('div');
 	this.elem.classList.add('branch_header');
 
-	this.enter = function () {
-		this.elem.classList.add('branch_highlight');
-	};
-
-	this.leave = function () {
-		this.elem.classList.remove('branch_highlight');
-	};
-
 	this.set = function (text) {
 		this.elem.innerHTML = text;
 	};
@@ -39,14 +31,6 @@ function BranchContent() {
 function BranchExpander() {
 	this.elem = document.createElement('td');
 	this.elem.classList.add('branch_expander');
-
-	this.enter = function () {
-		this.elem.classList.add('branch_highlight');
-	};
-
-	this.leave = function () {
-		this.elem.classList.remove('branch_highlight');
-	};
 
 	this.update = function (state) {
 		this.elem.innerHTML = state;
@@ -99,28 +83,10 @@ function Branch(header) {
 		this.expander.update('+');
 	};
 
-	// hover
-
-	this.enter = function () {
-		this.expander.enter();
-		this.header.enter();
-		this.elem.classList.add('branch_highlight');
-	};
-	this.elem.onmouseenter = this.enter.bind(this);
-
-	this.leave = function () {
-		this.expander.leave();
-		this.header.leave();
-		this.elem.classList.remove('branch_highlight');
-	};
-	this.elem.onmouseleave = this.leave.bind(this);
-
-	this.leave();
-
 	// open-close
 
 	this.opened = false;
-
+	this.loading = false;
 	this.open = function () {
 		if(!this.lazy) {
 			this.content.open();
@@ -132,7 +98,8 @@ function Branch(header) {
 			}
 
 			this.opened = true;
-		} else {
+		} else if(!this.loading) {
+			this.loading = true;
 			this.expander.update('*');
 			this.message.innerHTML = 'loading...';
 			this.loader((function (status, message, branches) {
@@ -147,6 +114,7 @@ function Branch(header) {
 					this.message.innerHTML = status + ': ' + message;
 					this.expander.update('+');
 				}
+				this.loading = false;
 			}).bind(this));
 		}
 	};

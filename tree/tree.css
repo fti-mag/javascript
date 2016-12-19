@@ -8,6 +8,10 @@ html {
 	background-color: #FFFFFF;
 }
 
+.branch:hover {
+	background-color: #FFEE66;
+}
+
 .branch_expander {
 	width: 16px;
 	// transition: 0.5s;
@@ -39,8 +43,4 @@ html {
 .branch_message {
 	color: #AA0000;
 	cursor: pointer;
-}
-
-.branch_highlight {
-	background-color: #FFEE66;
 }
